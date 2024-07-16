@@ -12,6 +12,17 @@ internal static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
+        builder.Services.Configure<IISOptions>(options =>
+        {
+            options.AuthenticationDisplayName = "Windows";
+            options.AutomaticAuthentication = false;
+        });
+        builder.Services.Configure<IISServerOptions>(options =>
+        {
+            options.AutomaticAuthentication = false;
+            options.AuthenticationDisplayName = "Windows";
+        });
+
         // uncomment if you want to add a UI
         builder.Services.AddRazorPages();
 
